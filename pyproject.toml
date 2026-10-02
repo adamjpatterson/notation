@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "notation"
+dynamic = ["version"]
+description = "Declarative metadata registries for Python functions, with dictionary and attribute access."
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["annotations", "decorator", "metadata", "registry"]
+authors = [
+  { name = "Adam Patterson", email = "adpatter2000@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/adamjpatterson/notation#readme"
+Issues = "https://github.com/adamjpatterson/notation/issues"
+Source = "https://github.com/adamjpatterson/notation"
+
+[tool.hatch.version]
+path = "src/notation/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --strict {args:src/notation tests/typecheck_notation.py}"
+
+[tool.coverage.run]
+source_pkgs = ["notation"]
+branch = true
+omit = [
+  "src/notation/__about__.py",
+]
+
+[tool.coverage.paths]
+notation = ["src/notation", "*/notation/src/notation"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
